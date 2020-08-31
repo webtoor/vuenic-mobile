@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ubah Proyek</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="EditUserProjectForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Nama Proyek <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Masukan Nama Proyek" formControlName="project_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Proyek <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getProjectType($event)" formControlName="project_id" placeholder="Pilih Proyek" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Jenis Proyek <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select disabled="{{project_typesIsEnabled}}" (ionChange)="getCommodity($event)" formControlName="project_type_id" placeholder="Pilih Jenis Projek" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let project_type of project_types" [value]="project_type.id">{{project_type.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="commodityHidden == false">
+      <ion-label position="stacked">Komoditas</ion-label>
+      <ion-select disabled="{{commoditiesIsEnabled}}" (ionChange)="getCommodityType($event)" formControlName="commodity_id" placeholder="{{placeHDCommodity}}" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let commodity of commodities" [value]="commodity.commodity.id">{{commodity.commodity.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="commodityTypeHidden == false">
+      <ion-label position="stacked">Jenis Komoditas</ion-label>
+      <ion-select disabled="{{commodity_typesIsEnabled}}" formControlName="commodity_type_id" placeholder="{{placeHDCommodityType}}" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let commodity_type of commodity_types" [value]="commodity_type.id">{{commodity_type.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="EditUserProjectForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
+  </form>
+</ion-content>

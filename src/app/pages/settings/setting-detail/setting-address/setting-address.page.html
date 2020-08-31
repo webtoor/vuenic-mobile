@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="addMyAddress()">
+      <ion-button>
+        <ion-icon slot="icon-only" md="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Pengaturan Alamat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of userAddress">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: 16px;">{{item.address_label}}</ion-card-title>
+      <ion-card-subtitle>Alamat : {{item.address}}</ion-card-subtitle>
+      <ion-card-subtitle>Provinsi : {{item.province.province}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.city.type}} : {{item.city.city_name}}</ion-card-subtitle>
+      <ion-card-subtitle>Kecamatan : {{item.districts.subdistrict_name}}</ion-card-subtitle>
+      <div class="ion-text-right">
+        <ion-button slot="end" color="primary" fill="clear" (click)="editMyAddress(item.id)">Ubah</ion-button>
+        <ion-button slot="end" color="danger" fill="clear" (click)="deleteMyAddress(item.id, item.address_label)">Hapus</ion-button>
+      </div>
+    </ion-card-header>
+  </ion-card>
+</div>
+</ion-content>
+
+
+  
+
+
+

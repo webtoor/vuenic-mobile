@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Konfirmasi Hapus</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="deleteConfirmForm" (ngSubmit)="onSubmit()">
+
+  <ion-item class="marginTop">
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password"></ion-input>
+      <ion-icon slot="end" [name]="passwordToggleIcon" style="margin-top: 25px;" (click)="togglePassword()"></ion-icon>
+  </ion-item>
+
+  <div class="ion-text-center" style="margin-top:40px">
+    <ion-button [disabled]="deleteConfirmForm.invalid" expand="block" type="submit" style="height:40px" >KONFIRMASI</ion-button>
+  </div>
+  </form>
+
+</ion-content>
+

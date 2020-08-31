@@ -1,0 +1,10 @@
+ion-menu-button {
+    //color: var(--ion-color-primary);
+    color: white;
+}
+ion-card {
+    --background: white !important;
+}
+body {
+    color: rgba(var(--ion-text-color-rgb), 0.5);
+}

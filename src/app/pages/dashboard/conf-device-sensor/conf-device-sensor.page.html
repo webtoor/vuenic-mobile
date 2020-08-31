@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pengaturan Device & Sensor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey-light">
+  <ion-list lines="inset">
+    <!-- <ion-item (click)="editDeviceSensor()"> -->
+      <!-- <ion-item>
+      <ion-label>
+        <h3>Ubah Device & Sensor</h3>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger">
+          <ion-icon slot="icon-only" icon="arrow-forward-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item> -->
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>
+          API KEY   
+        <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px" (click)="copyTextButton(apiDevKey)" >
+          <ion-button color="primary" size="small">
+            <ion-icon slot="start" name="copy-outline"></ion-icon>
+            Salin
+          </ion-button>
+        </ion-buttons>
+
+      </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{apiDevKey}}
+      </ion-card-content>
+    </ion-card>
+    <ion-item (click)="linkDocAPI()">
+      <ion-label>
+        <h3>Dokumen Integrasi IoT Device</h3>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="primary">
+          <ion-icon slot="icon-only" icon="arrow-forward-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    
+    <ion-item (click)="deleteDevice()" lines="none">
+      <ion-label>
+        <h3>Hapus Device</h3>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger">
+          <ion-icon slot="icon-only" icon="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

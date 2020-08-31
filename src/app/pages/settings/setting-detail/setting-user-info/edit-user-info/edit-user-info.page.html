@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ubah {{labelName}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="EditUserInfoForm" (ngSubmit)="onSubmit()">
+
+    <div *ngIf="formName !== 'dateofbirth' && formName !== 'gender'">
+      <ion-item *ngIf="formType != 'date'">
+        <ion-label position="stacked">{{labelName}} <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="{{formType}}" placeholder="Masukan {{labelName}}" formControlName="{{formName}}"></ion-input>
+      </ion-item>
+    </div>
+
+    <div *ngIf="formName == 'dateofbirth'">
+      <p style="font-size: 14px;">Kamu hanya dapat mengisi 1 kali, Pastikan {{labelName}} sudah benar.</p>
+      <ion-item *ngIf="formName == 'dateofbirth'"> 
+        <ion-label position="stacked">{{labelName}} <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime displayFormat="DD-MMM-YYYY"  min="1970-01-01" max="{{dateNow}}" formControlName="{{formName}}" placeholder="Masukan Tanggal lahir"></ion-datetime>
+      </ion-item>
+    </div>
+
+    <div *ngIf="formName == 'gender'">
+      <p *ngIf="formName == 'gender'" style="font-size: 14px;">Kamu hanya dapat mengisi jenis kelamin lengkap 1 kali, Pastikan sudah benar.</p>
+      <ion-item>
+        <ion-label position="stacked">Jenis Kelamin <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select placeholder="Pilih" formControlName="{{formName}}">
+          <ion-select-option value="1">Wanita</ion-select-option>
+          <ion-select-option value="2">Pria</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+    
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="EditUserInfoForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
+  </form>
+</ion-content>
+  
+

@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color="primary">
+   <!--  <ion-buttons slot="start" (click)="backButton()">
+      <ion-button>
+        <ion-icon slot="icon-only" md="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Buat Proyek</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
+    <ion-card-header>
+      <ion-card-subtitle color="primary"><b>I. Lokasi Proyek <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
+    </ion-card-header>
+  
+
+    <ion-item>
+      <ion-label position="stacked">Provinsi <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getCity($event)" formControlName="province_id" placeholder="Pilih Provinsi" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.province}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kota/Kabupaten <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getDistricts($event)" formControlName="city_id" placeholder="Pilih Kota/Kabupaten" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let city of cities" [value]="city.id">{{city.type}} {{city.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kecamatan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select  formControlName="districts_id" placeholder="Pilih Kelurahan" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let district of districts" [value]="district.id">{{district.subdistrict_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Alamat Lengkap <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea rows="3" type="text" placeholder="Contoh : Jl Setiabudi No 5" formControlName="address"></ion-textarea>
+    </ion-item>
+
+    <ion-card-header style="margin-top:10px;">
+      <ion-card-subtitle color="primary"><b>II. Informasi Proyek <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-label position="stacked">Nama Proyek <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Masukan Nama Proyek" formControlName="project_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Proyek <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getProjectType($event)" formControlName="project_id" placeholder="Pilih Proyek" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Jenis Proyek <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getCommodity($event)" formControlName="project_type_id" placeholder="Pilih Jenis Projek" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let project_type of project_types" [value]="project_type.id">{{project_type.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="commodityHidden == false">
+      <ion-label position="stacked">Komoditas</ion-label>
+      <ion-select (ionChange)="getCommodityType($event)" formControlName="commodity_id" placeholder="{{placeHDCommodity}}" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let commodity of commodities" [value]="commodity.commodity.id">{{commodity.commodity.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="commodityTypeHidden == false">
+      <ion-label position="stacked">Jenis Komoditas</ion-label>
+      <ion-select formControlName="commodity_type_id" placeholder="{{placeHDCommodityType}}" okText="" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let commodity_type of commodity_types" [value]="commodity_type.id">{{commodity_type.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="createProjectForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
+  </form>
+</ion-content>
+  

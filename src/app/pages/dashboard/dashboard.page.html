@@ -1,0 +1,192 @@
+<ion-header class="ion-no-border">
+  <div *ngIf="projectName; else emptyProjectHeader">
+  <ion-toolbar color="primary" style="height: 150px;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="listProject()">
+      <ion-button>
+        <ion-icon slot="icon-only" md="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <img src="/assets/images/text-white.png" height="28px;" style="margin-top: 10px;">
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="x" style="margin-top:-100px;">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <b>{{projectName}}</b> 
+          <ion-badge color="primary" *ngIf="project" style="margin-left: 10px;"><b>{{project}}</b></ion-badge>
+         
+          <ion-buttons style="float: right; margin-top: -10px; margin-right: -15px" (click)="settingUserProject(projectID)">
+            <ion-button>
+              <ion-icon slot="icon-only" name="options-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-badge color="primary" *ngIf="projectType" style="margin-left: 5px;"><b>{{projectType}}</b></ion-badge>
+          <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityName"><b>{{commodityName}}</b></ion-badge>
+          <!-- <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityTypeName"><b>{{commodityTypeName}}</b></ion-badge> -->
+          <ion-badge color="danger" style="margin-left: 5px;" *ngIf="projectDevice"><b>{{projectDevice}} </b> Device</ion-badge>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="projectLocation">
+          <ion-icon name="location-sharp" color="dark"></ion-icon>{{projectLocation?.address}}
+          {{projectLocation?.districts.subdistrict_name}}, {{projectLocation?.districts.city}},
+          {{projectLocation?.districts.province}}
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
+</div>
+
+<!-- EMPTY PROJECT HEADER-->
+<ng-template #emptyProjectHeader>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <img src="/assets/images/text-white.png" height="28px;" style="margin-top: 4px; margin-right: 35px;">
+    </ion-title>
+  </ion-toolbar>
+</ng-template>
+<!-- EMPTY PROJECT HEADER-->
+</ion-header>
+
+
+<!-- Scrollable Segment -->
+<!-- class="ion-padding-start ion-padding-end" -->
+<div *ngIf="projectDevice">
+  <ion-segment scrollable color="dark" (ionChange)="segmentChanged($event.detail.value)" value="{{segmentDefault}}">
+    <div *ngFor="let device of deviceSegment; let i=index;">
+      <ion-segment-button value="{{device.id}}" layout="icon-end">
+        <sup>
+          <ion-badge color="danger">{{i+1}}</ion-badge>
+        </sup>
+        <ion-label>IoT-Device</ion-label>
+      </ion-segment-button>
+    </div>
+  </ion-segment>
+  </div>
+
+<ion-content>
+  <div *ngIf="projectName; else emptyProject">
+  <ion-grid>
+    <div *ngIf="projectDevice; else emptyDevice">
+      <div class="ion-text-center" style="margin-top: 10px;">
+        <ion-button color="yellow-light" size="small" (click)="settingDeviceSensor(segmentDefault)">
+          <ion-icon slot="start" name="options-outline"></ion-icon>
+          Pengaturan Device & Sensor
+        </ion-button>
+        <ion-button color="secondary" size="small" fill="clear" (click)="addSensor(segmentDefault)">
+          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+        </ion-button>
+      </div>
+    <div *ngIf="deviceSensor?.length > 0; else emptySensorData">
+      <ion-row>
+        <ion-col size="6" *ngFor="let sensor of deviceSensor">
+          <ion-card (click)="tableSensor(segmentDefault, sensor.sensor_id)">
+            <ion-card-header>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 1">Kelembaban</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 2">Kelembaban Tanah</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 4">Suhu Air</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 5">pH</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 6">TDS</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 7">Warna (RGB)</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 8">Jarak</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 9">Ultraviolet</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 10">Intensitas Cahaya</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 11">Debu/Asap</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 12">O<sub>2</sub></ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 13">CO<sub>2</sub></ion-card-subtitle>
+
+            </ion-card-header>
+
+            <ion-card-content style="padding:0">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-img *ngIf="sensor.sensor_id == 1" src="/assets/images/sensor/humidity.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 2" src="/assets/images/sensor/soil-humidity.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/sensor/temperature.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 4" src="/assets/images/sensor/water-temperature.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 5" src="/assets/images/sensor/ph.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 6" src="/assets/images/sensor/tds.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 7" src="/assets/images/sensor/rgb.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 8" src="/assets/images/sensor/distance.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 9" src="/assets/images/sensor/uv.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 10" src="/assets/images/sensor/light.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 11" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 12" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 13" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+
+                  </ion-col>
+                  <ion-col>
+                    <div style="margin-top: 10px;">
+                      <b style="font-size: 21px; padding-right: 5px;" *ngIf="sensor.data_sensor != null;">{{sensor.data_sensor.sensor_value|number:'0.0-1'}}</b>
+                      <b *ngIf="(sensor.sensor_id == 1) && (sensor.data_sensor != null)"><sup>%</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 2) && (sensor.data_sensor != null)"><sup>%</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 3) && (sensor.data_sensor != null)"><sup>°C</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 4) && (sensor.data_sensor != null)"><sup>°C</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 5) && (sensor.data_sensor != null)"><sup>pH</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 6) && (sensor.data_sensor != null)"><sup>ppm</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 7) && (sensor.data_sensor != null)"><sup>color</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 8) && (sensor.data_sensor != null)"><sup>meter</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 9) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 10) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 11) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 12) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 13) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ng-template #emptySensorData>
+      <div style="text-align: center;">
+        <ion-img src="/assets/images/logo-vuenic.png" style="height: 100px; margin-top: 18%;"></ion-img>
+        <h5 style="font-size: 13px; margin-top:15px;"><ion-badge color="danger">Anda belum memiliki sensor pada device ini</ion-badge></h5>
+      </div>
+    </ng-template>
+    </div>
+    <ng-template #emptyDevice>
+      <div class="ion-text-center" style="margin-left: -200px;">
+        <ion-fab vertical="center" (click)="createDeviceSensor(projectID)">
+          <ion-button color="danger">
+            <ion-icon name="add-circle" style="padding-right:5px;"></ion-icon>
+              Device & Sensor
+          </ion-button>
+        </ion-fab>
+      </div>
+    </ng-template>
+  </ion-grid>
+</div>
+
+
+<!-- EMPTY PROJECT -->
+<ng-template #emptyProject>
+  <div class="ion-text-center" style="margin-left: -150px;">
+    <ion-fab vertical="center" (click)="createProject()">
+      <ion-button>
+        <ion-icon name="add-circle" style="padding-right:5px;"></ion-icon>
+        Buat Proyek
+      </ion-button>
+    </ion-fab>
+  </div>
+</ng-template>
+<!-- EMPTY PROJECT -->
+
+</ion-content>
+
+  

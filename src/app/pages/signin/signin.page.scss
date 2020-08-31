@@ -1,0 +1,32 @@
+.marginTop{
+    // margin-top:150px;
+        margin: 20px 0;
+}
+.invalid-feedback{
+    color: #ff0000;
+    font-size: 13px;
+}
+:host {
+    .item-interactive.ion-valid{
+      --highlight-background: #3dc2ff !important;
+    }
+  }
+
+ion-button {
+  text-transform: none;
+}
+ .atau {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+ }
+ .garis1 {
+    border: 1px solid #d7d8da;
+    width: 80%;
+    height: 0px;
+ }
+ .garis2 {
+    border: 1px solid #d7d8da;
+    width: 80%;
+    height: 0px;
+ }

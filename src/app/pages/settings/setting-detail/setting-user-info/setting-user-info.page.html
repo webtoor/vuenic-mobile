@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Data Diri</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center" style="margin-top:30px;">
+    <img src="/assets/images/logo-vuenic.png" height="100px;" width="100px;" style="border:1px solid #3dc2ff;  border-radius: 55%;">
+  </div>
+
+  <ion-list lines="none" style="margin-top: 10px;">    
+    <ion-item>
+      <ion-label>
+        <p>Nama Lengkap</p>
+        <h2>{{infoUser?.fullname}}</h2>
+      </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(1, infoUser?.fullname)">Ubah</div>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>
+        <p>Tanggal Lahir</p>
+        <h2 *ngIf="infoUser?.dateofbirth">{{infoUser?.dateofbirth | date: "dd-MMMM-yyy"}}</h2>
+        <h2 *ngIf="!infoUser?.dateofbirth">N/A</h2>
+      </ion-label>
+      <div *ngIf="!infoUser?.dateofbirth" style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(2, null)">Ubah</div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>Jenis Kelamin</p>
+        <h2 *ngIf="infoUser?.gender == 1">Wanita</h2>
+        <h2 *ngIf="infoUser?.gender == 2">Pria</h2>
+        <h2 *ngIf="!infoUser?.gender">N/A</h2>
+      </ion-label>
+      <div *ngIf="!infoUser?.gender" style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(3, null)">Ubah</div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>Email</p>
+        <h2 *ngIf="infoUser?.email">{{infoUser?.email}}</h2>
+      </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(4, infoUser?.email)">Ubah</div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <p>Nomor HP</p>
+        <h2 *ngIf="infoUser?.phonenumber">+{{infoUser?.phonenumber}}</h2>
+        <h2 *ngIf="!infoUser?.phonenumber">N/A</h2>
+      </ion-label>
+      <div style="color:#17a9d0; font-size:12px; font-weight:bold" (click)="editUserInfo(5, infoUser?.phonenumber)">Ubah</div>
+    </ion-item>
+  </ion-list>
+ 
+</ion-content>

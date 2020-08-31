@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="backButton()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>List Proyek</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey-light">
+  <div *ngFor="let item of listUserProject">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <b>{{item.project_name}}</b> 
+        <ion-badge color="primary" *ngIf="item.project" style="margin-left: 10px;"><b>{{item.project?.name}}</b></ion-badge>
+       
+        <div style="float: right; margin-top: -10px; margin-right: -15px">
+        <ion-buttons (click)="showUserProject(item.id)">
+          <ion-button color="dark" fill="clear">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+
+          <ion-buttons (click)="settingUserProject(item.id)">
+            <ion-button color="dark" fill="clear">
+              <ion-icon slot="icon-only" name="options-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-badge color="primary" *ngIf="item.project_type" style="margin-left: 5px;"><b>{{item.project_type?.name}}</b></ion-badge>
+        <ion-badge color="primary" style="margin-left: 5px;" *ngIf="item.commodity"><b>{{item.commodity?.name}}</b></ion-badge>
+        <!-- <ion-badge color="primary" style="margin-left: 5px;" *ngIf="commodityTypeName"><b>{{commodityTypeName}}</b></ion-badge> -->
+        <ion-badge color="danger" style="margin-left: 5px;" *ngIf="item.project_device?.length > 0"><b>{{item.project_device?.length}} </b> Device</ion-badge>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngIf="item.project_location">
+        <ion-icon name="location-sharp" color="dark"></ion-icon>{{item.project_location?.address}}
+        {{item.project_location?.districts.subdistrict_name}}, {{item.project_location?.districts.city}},
+        {{item.project_location?.districts.province}}
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="createProject()">
+  <ion-fab-button color="primary">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

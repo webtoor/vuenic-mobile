@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tambah Device & Sensor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="createDevSensorForm" (ngSubmit)="onSubmit()">
+    <ion-card-header>
+      <ion-card-subtitle color="primary"><b>I. Device <ion-text color="danger">*</ion-text></b></ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-item>
+      <ion-label position="stacked">Device <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select formControlName="device_id" okText="" placeholder="Pilih Device" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let device of devices" [value]="device.id">{{device.device_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+     
+    <ion-item>
+      <ion-label position="stacked">Sensor <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select multiple="true" formControlName="sensor_id" okText="OK" placeholder="Pilih Sensor" cancelText="Tutup">
+        <ion-select-option *ngFor="let sensor of sensors" [value]="sensor.id">{{sensor.sensor_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="createDevSensorForm.invalid" expand="block" type="submit" style="height:40px">
+        SUBMIT
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
+  
+

@@ -1,0 +1,7 @@
+{
+  "name": "vuenic-pwa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

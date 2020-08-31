@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ubah Lokasi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="EditProjectLocationForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Masukan Alamat" formControlName="address"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Provinsi <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getCity($event)" formControlName="province_id" placeholder="Pilih Provinsi" okText="OK" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.province}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kota/Kabupaten <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select disabled="{{kotaIsEnabled}}" (ionChange)="getDistricts($event)" formControlName="city_id" okText="" placeholder="Pilih Kota/Kabupaten" cancelText="" interface="action-sheet">
+        <ion-select-option *ngFor="let city of cities" [value]="city.id">{{city.type}} {{city.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kecamatan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select disabled="{{kecamatanIsEnabled}}" formControlName="districts_id" okText="" placeholder="Pilih Kelurahan" cancelText="" interface="action-sheet">
+        <ion-select-option *ngFor="let district of districts" [value]="district.id">{{district.subdistrict_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="EditProjectLocationForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
+  </form>
+</ion-content>
+  
+
+

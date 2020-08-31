@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pengaturan</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content color="grey-light">
+  <ion-list lines="inset">
+
+    <ion-item (click)="settingDetail()">
+      <ion-label>
+        <h3>Akun</h3>
+        <p style="color:#c5c5c5;">Data Diri, Alamat dan Keamanan Akun</p>
+      </ion-label>
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-item>
+
+   <!--  <ion-item>
+      <ion-label>
+        <h2>Notifikasi</h2>
+        <p style="color:#c5c5c5;">Aplikasi, Sensor dan Lainnya</p>
+      </ion-label>
+      <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Lokasi</h2>
+        <p style="color:#c5c5c5;">Mendeteksi Lokasi secara otomatis</p>
+      </ion-label>
+      <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-label>
+        <h3>Tentang Vuenic</h3>
+      </ion-label>
+      <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+  <ion-item (click)="signOut()" lines="none">
+    <ion-label>
+      <h3>Keluar</h3>
+    </ion-label>
+    <ion-icon name="log-out-outline" slot="end"></ion-icon>
+  </ion-item>
+  
+  </ion-list>
+</ion-content>

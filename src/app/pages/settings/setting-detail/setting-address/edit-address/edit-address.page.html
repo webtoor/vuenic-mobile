@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerDirection="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ubah Alamat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="editUserAddressForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Label Alamat <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Rumah/Kos/Apartemen/Kantor" formControlName="address_label"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Provinsi <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select (ionChange)="getCity($event)" formControlName="province_id" placeholder="Pilih Provinsi" okText="OK" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.province}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kota/Kabupaten <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select disabled="{{kotaIsEnabled}}" (ionChange)="getDistricts($event)" formControlName="city_id" okText="OK" cancelText="TUTUP" placeholder="Pilih Kota/Kabupaten" interface="action-sheet">
+        <ion-select-option *ngFor="let city of cities" [value]="city.id">{{city.type}} {{city.city_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kecamatan <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select disabled="{{kecamatanIsEnabled}}" formControlName="districts_id"  placeholder="Pilih Kelurahan" okText="OK" cancelText="TUTUP" interface="action-sheet">
+        <ion-select-option *ngFor="let district of districts" [value]="district.id">{{district.subdistrict_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Alamat <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" placeholder="Masukan Alamat" formControlName="address"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kode Pos</ion-label>
+      <ion-input type="number" placeholder="Masukan Kode Pos" formControlName="postal_code"></ion-input>
+    </ion-item>
+
+    <div class="ion-text-center" style="margin-top:40px">
+      <ion-button [disabled]="editUserAddressForm.invalid" expand="block" type="submit" style="height:40px" >SUBMIT</ion-button>
+    </div>
+  </form>
+</ion-content>

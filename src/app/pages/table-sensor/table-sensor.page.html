@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="backButton()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Tabel Data Sensor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey-light">
+  <div  class="ion-padding">
+    <ion-button expand="block" color="danger" fill="outline">Lihat Grafik
+      <ion-icon slot="start" icon="bar-chart-sharp"></ion-icon>
+    </ion-button>
+  </div>
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="header-row">
+          <ion-col>
+              <b>Tanggal & Jam</b>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <b *ngIf="sensorID == 1">Kelembaban</b>
+            <b *ngIf="sensorID == 2">Kelembaban Tanah</b>
+            <b *ngIf="sensorID == 3">Suhu</b>
+            <b *ngIf="sensorID == 4">Suhu Air</b>
+            <b *ngIf="sensorID == 5">pH</b>
+            <b *ngIf="sensorID == 6">TDS</b>
+            <b *ngIf="sensorID == 7">Warna (RGB)</b>
+            <b *ngIf="sensorID == 8">Jarak</b>
+            <b *ngIf="sensorID == 9">Ultraviolet</b>
+            <b *ngIf="sensorID == 10">Intensitas Cahaya</b>
+            <b *ngIf="sensorID == 11">Debu/Asap</b>
+            <b *ngIf="sensorID == 12">O<sub>2</sub></b>
+            <b *ngIf="sensorID == 13">CO<sub>2</sub></b>       
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let data of arraySensor" class="data-row">
+          <ion-col>
+              {{data.created_at | date: "dd MMM yyy HH:mm" }}
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <b *ngIf="sensorID != null;">{{data.sensor_value|number:'0.0-1'}}</b>
+            <b *ngIf="(sensorID == 1) && (sensorID != null)"><sup> %</sup></b>
+            <b *ngIf="(sensorID == 2) && (sensorID != null)"><sup> %</sup></b>
+            <b *ngIf="(sensorID == 3) && (sensorID != null)"><sup> °C</sup></b>
+            <b *ngIf="(sensorID == 4) && (sensorID != null)"><sup> °C</sup></b>
+            <b *ngIf="(sensorID == 5) && (sensorID != null)"><sup> pH</sup></b>
+            <b *ngIf="(sensorID == 6) && (sensorID != null)"><sup> ppm</sup></b>
+            <b *ngIf="(sensorID == 7) && (sensorID != null)"><sup> color</sup></b>
+            <b *ngIf="(sensorID == 8) && (sensorID != null)"><sup> meter</sup></b>
+            <b *ngIf="(sensorID == 9) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 10) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 11) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 12) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 13) && (sensorID != null)"><sup> -</sup></b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-padding">
+    <ion-button expand="block" color="danger" fill="clear" (click)="deleteSensor(sensorID)">Hapus Sensor
+      <ion-icon slot="start" icon="trash-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>
