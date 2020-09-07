@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { IonRouterOutlet, Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   public selectedIndex = 0;
   emailShow :string;
@@ -31,23 +31,7 @@ export class AppComponent implements OnInit {
       url: '/tabs/about',
       icon: 'information-circle'
     },
-   /*  {
-      title: 'Archived',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
-    } */
   ];
-  public labels = []//['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -71,9 +55,9 @@ export class AppComponent implements OnInit {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
       } else if (this.router.url === '/signin' || this.router.url === '/tabs/dashboard') {
-        navigator['app'].exitApp()
-      } else {
         this.presentAlertConfirm()
+      } else {
+        this.routerOutlet.pop();
       }
     });
     
@@ -88,7 +72,7 @@ export class AppComponent implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertCtrl.create({
-      header: 'Confirm!',
+      header: 'Exit App',
       message: 'Apakah kamu ingin menutup aplikasi?',
       buttons: [
         {
@@ -107,12 +91,5 @@ export class AppComponent implements OnInit {
     });
 
     await alert.present();
-  }
-
-  ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    }
   }
 }
