@@ -67,24 +67,29 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.statusBar.backgroundColorByHexString('#1e2023');
+      this.statusBar.styleBlackTranslucent();
     });
   }
 
   async presentAlertConfirm() {
     const alert = await this.alertCtrl.create({
+      cssClass: 'alertCancel',
       header: 'Exit App',
       message: 'Apakah kamu ingin menutup aplikasi?',
       buttons: [
         {
-          text: 'Cancel',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Okay',
+          text: 'Ya',
           handler: () => {
             console.log('Confirm Okay');
             navigator['app'].exitApp()
+          }
+        }, {
+          text: 'Tidak',
+          role: 'cancel',
+          cssClass: 'alertButton',
+          handler: () => {
+            console.log('Confirm Cancel');
           }
         }
       ]
