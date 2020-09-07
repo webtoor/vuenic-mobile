@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { IonRouterOutlet, Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { EventsService } from './services/events.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { EventsService } from './services/events.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   public selectedIndex = 0;
   emailShow :string;
   public appPages = [
@@ -51,7 +53,9 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private events:EventsService
+    private events:EventsService,
+    private alertCtrl: AlertController,
+    private router: Router,
   ) {
     const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
     if(token){
@@ -62,6 +66,17 @@ export class AppComponent implements OnInit {
       console.log(this.emailShow);
     });
     this.initializeApp();
+
+    this.platform.backButton.subscribe(() => {
+      if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+        this.routerOutlet.pop();
+      } else if (this.router.url === '/signin' || this.router.url === '/tabs/dashboard') {
+        navigator['app'].exitApp()
+      } else {
+        this.presentAlertConfirm()
+      }
+    });
+    
   }
 
   initializeApp() {
@@ -69,6 +84,29 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm!',
+      message: 'Apakah kamu ingin menutup aplikasi?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            navigator['app'].exitApp()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnInit() {

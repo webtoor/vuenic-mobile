@@ -46,44 +46,6 @@ export class SigninPage implements OnInit {
     }
   }
 
-  signInWithGithub(){
-    window.location.href='https://github.com/login/oauth/authorize?scope=user%20email&client_id=e9a252050722608e005f&redirect_uri=https://apps.vuenic.com/auth/github/callback';
-  }
-
-  signInWithGoogle(): void {
-    this.authSocial.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.authSocial.authState.subscribe(data => {
-      console.log(data)
-      this.socialToken = data.idToken
-      this.socialProvider = "GOOGLE";
-      this.postSocialAuth(data)
-    }); 
-  }
-
-  postSocialAuth(data){
-    //console.log(data.email)
-    this.socialLogin.email = data.email;
-    this.socialLogin.fullname = data.name;
-    this.socialLogin.provider = this.socialProvider;
-    this.socialLogin.social_id = data.id.toString();
-    this.socialLogin.token = this.socialToken;
-
-    //console.log(this.socialLogin)
-    this.loading.present();
-    this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
-      //console.log(res)
-      if(res.access_token) {
-        localStorage.setItem('vuenic-pwa', JSON.stringify(res));
-        this.events.publish('email', res.email);
-        this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
-        this.loading.dismiss();
-      }else if(res.error){
-        this.presentToast('Invalid Token',);
-        this.loading.dismiss();
-      }
-    });
-  }
-
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
