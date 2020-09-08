@@ -47,6 +47,7 @@ export class AppComponent {
       this.emailShow = email;
       console.log(this.emailShow);
     });
+    
     this.initializeApp();
 
     this.platform.backButton.subscribe(() => {
@@ -55,7 +56,7 @@ export class AppComponent {
       } else if (this.router.url === '/signin' || this.router.url === '/tabs/dashboard') {
         this.presentAlertConfirm()
       } else {
-        this.routerOutlet.pop();
+        this.router.navigate(["/tabs/dashboard"])
       }
     });
     

@@ -9,7 +9,8 @@
       "SplashScreen": {
         "launchAutoHide": false,
         "backgroundColor": "#17a9d0",
-        "showSpinner": false
+        "showSpinner": false,
+        "androidScaleType": "CENTER_CROP"
       },
       "GoogleAuth": {
         "scopes": ["profile", "email"],
