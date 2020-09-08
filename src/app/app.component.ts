@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { IonRouterOutlet, Platform, AlertController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { EventsService } from './services/events.service';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
+const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -35,8 +35,6 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     private events:EventsService,
     private alertCtrl: AlertController,
     private router: Router,
@@ -65,10 +63,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      this.statusBar.backgroundColorByHexString('#1e2023');
-      this.statusBar.styleBlackTranslucent();
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 100);
     });
   }
 

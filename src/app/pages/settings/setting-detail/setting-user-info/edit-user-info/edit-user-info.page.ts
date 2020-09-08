@@ -88,6 +88,12 @@ export class EditUserInfoPage implements OnInit {
     if (this.EditUserInfoForm.invalid) {
         return;
     }
+
+    if(this.EditUserInfoForm.value.dateofbirth !== ""){
+      this.EditUserInfoForm.patchValue({
+        dateofbirth : formatDate(this.EditUserInfoForm.value.dateofbirth,'yyyy-MM-dd', 'en'),
+      })
+    }
     console.log(this.EditUserInfoForm.value)
     this.httpService.PutRequest(this.EditUserInfoForm.value, 'user-info').subscribe(res => {
       console.log(res)

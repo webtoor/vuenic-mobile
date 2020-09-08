@@ -6,13 +6,16 @@
   "webDir": "www",
   "plugins" : 
   {
-    "plugins": {
+      "SplashScreen": {
+        "launchAutoHide": false,
+        "backgroundColor": "#17a9d0",
+        "showSpinner": false
+      },
       "GoogleAuth": {
         "scopes": ["profile", "email"],
         "serverClientId": "28911267521-6ljvm9jqs9lah92ffddgr6qml903qsas.apps.googleusercontent.com",
         "forceCodeForRefreshToken" : true
       }
-    }
-  },
+    },
   "cordova": {}
 }
