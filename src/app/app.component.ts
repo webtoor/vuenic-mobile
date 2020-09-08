@@ -4,7 +4,7 @@ import { IonRouterOutlet, Platform, AlertController } from '@ionic/angular';
 import { EventsService } from './services/events.service';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
-const { SplashScreen } = Plugins;
+const { SplashScreen, StatusBar } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -65,6 +65,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       setTimeout(() => {
         SplashScreen.hide();
+        StatusBar.setBackgroundColor({
+          color:'#17a9d0'
+        });
       }, 100);
     });
   }
