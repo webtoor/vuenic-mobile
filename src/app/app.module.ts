@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS, } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import "@codetrix-studio/capacitor-google-auth";
 
 @NgModule({
   declarations: [AppComponent],

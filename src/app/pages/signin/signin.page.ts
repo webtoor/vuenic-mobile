@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { EventsService } from '../../services/events.service';
-
+import { Plugins } from '@capacitor/core';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
@@ -42,6 +42,33 @@ export class SigninPage implements OnInit {
     if(check){
       this.router.navigate(["tabs/dashboard"])
     }
+  }
+
+  async signInWithGoogle() {
+    let googleUser = await Plugins.GoogleAuth.signIn();
+    this.socialLogin.email = googleUser.email;
+    this.socialLogin.fullname = googleUser.name;
+    this.socialLogin.provider = "GOOGLE"
+    this.socialLogin.social_id = googleUser.id.toString();
+    this.socialLogin.token = googleUser.authentication.idToken;
+    //console.log(this.socialLogin)
+   }
+
+  postSocialAuth(){
+    //console.log(this.socialLogin)
+    this.loading.present();
+    this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
+      //console.log(res)
+      if(res.access_token) {
+        localStorage.setItem('vuenic-pwa', JSON.stringify(res));
+        this.events.publish('email', res.email);
+        this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
+        this.loading.dismiss();
+      }else if(res.error){
+        this.presentToast('Invalid Token',);
+        this.loading.dismiss();
+      }
+    });
   }
 
   onSubmit() {

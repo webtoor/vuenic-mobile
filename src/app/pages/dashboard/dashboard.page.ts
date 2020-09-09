@@ -67,7 +67,7 @@ export class DashboardPage implements OnInit {
   
 
   ionViewWillEnter(){
-    //console.log("ionViewWillEnter")
+    console.log("ionViewWillEnter")
     //console.log(this.projectName, this.projectDevice)
     if(this.projectName && this.projectDevice){
       this.alive = true;
@@ -76,7 +76,7 @@ export class DashboardPage implements OnInit {
   }
 
   ionViewWillLeave(){
-    //console.log("ionViewWillLeave")
+    console.log("ionViewWillLeave")
     this.alive = false;
     this.refreshPage = 0;
     this.user_project_id = this.user_project_id

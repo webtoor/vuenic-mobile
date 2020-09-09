@@ -35,8 +35,19 @@
  <!--  <div class="ion-text-center" style="margin-top:15px">
     <a (click)="resetPWD()">Lupa Kata Sandi?</a>
   </div> -->
-  <div class="ion-text-center" style="margin-top:20px">
+  <div class="ion-text-center" style="margin-top:30px">
     <ion-button [disabled]="loginForm.invalid" expand="block" type="submit" style="height:40px" >Masuk</ion-button>
   </div>
   </form>
-</ion-content>
+
+  <div class="atau" style="margin-top:20px">
+    <span class="garis1"></span><span style="margin-left: 7px; margin-right: 7px; color:#92949c">atau</span>
+    <span class="garis2"></span>
+  </div>
+
+  <div class="ion-text-center" style="margin-top:10px">
+    <ion-button expand="block" color="medium" fill="outline" style="height:50px" (click)="signInWithGoogle()">
+      <img src="/assets/images/google.jpg" height="30px;" style="margin-right: 5px;">
+      <b>Masuk dengan Google</b>
+    </ion-button>
+  </div></ion-content>
