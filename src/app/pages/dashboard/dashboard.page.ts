@@ -101,7 +101,7 @@ export class DashboardPage implements OnInit {
         this.projectLocation = res.data.project_location;
 
         if(res.data.project_device){
-          localStorage.setItem('vuenic-dev-key', JSON.stringify(res.data.project_device));
+          localStorage.setItem('vuenic-dev-key-android', JSON.stringify(res.data.project_device));
           this.projectDevice = res.data.project_device.length;
           this.deviceSegment = res.data.project_device;
 

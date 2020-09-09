@@ -16,7 +16,7 @@ export class ConfDeviceSensorPage implements OnInit {
   }
 
   ngOnInit() {
-    const params = JSON.parse(localStorage.getItem('vuenic-dev-key'));
+    const params = JSON.parse(localStorage.getItem('vuenic-dev-key-android'));
     //console.log(params)
     for(var j=0; j < params.length; j++){
       if(params[j]["id"] == this.project_device_id){

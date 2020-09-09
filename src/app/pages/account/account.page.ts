@@ -14,7 +14,7 @@ export class AccountPage implements OnInit {
   constructor(public router : Router, public httpService: AuthService) { }
 
   ngOnInit() {
-    const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
+    const token = JSON.parse(localStorage.getItem('vuenic-android'));
     this.fullName = token["fullname"]
     this.getProjectDeviceInfo()
   }

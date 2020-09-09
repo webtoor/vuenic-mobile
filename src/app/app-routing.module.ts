@@ -17,10 +17,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
   },
   {
-    path: 'auth/:provider/callback',
-    loadChildren: () => import('./pages/auth-callback/auth-callback.module').then( m => m.AuthCallbackPageModule)
-  },
-  {
     path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
     canActivate : [AuthGuardService]
@@ -52,19 +48,23 @@ const routes: Routes = [
   },
   {
     path: 'chart/:projectID/:sensorID',
-    loadChildren: () => import('./pages/chart/chart.module').then( m => m.ChartPageModule)
+    loadChildren: () => import('./pages/chart/chart.module').then( m => m.ChartPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: 'table-sensor/:projectDeviceID/:sensorID/:userProjectID',
-    loadChildren: () => import('./pages/table-sensor/table-sensor.module').then( m => m.TableSensorPageModule)
+    loadChildren: () => import('./pages/table-sensor/table-sensor.module').then( m => m.TableSensorPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: 'delete-confirm',
-    loadChildren: () => import('./pages/delete-confirm/delete-confirm.module').then( m => m.DeleteConfirmPageModule)
+    loadChildren: () => import('./pages/delete-confirm/delete-confirm.module').then( m => m.DeleteConfirmPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: 'add-sensor/:projectDeviceID',
-    loadChildren: () => import('./pages/add-sensor/add-sensor.module').then( m => m.AddSensorPageModule)
+    loadChildren: () => import('./pages/add-sensor/add-sensor.module').then( m => m.AddSensorPageModule),
+    canActivate : [AuthGuardService]
   },
   {
     path: 'reset-password',
