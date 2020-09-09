@@ -5,7 +5,7 @@ import { ToastController, MenuController } from '@ionic/angular';
 import { EventsService } from 'src/app/services/events.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-signup',
@@ -23,8 +23,6 @@ export class SignupPage implements OnInit {
     social_id: '',
     token: ''
   }
-  socialToken;
-  socialProvider;
   showPassword = false;
   passwordToggleIcon = "eye";
   constructor(public route : ActivatedRoute, public events: EventsService, public loading: LoaderService, private formBuilder: FormBuilder, public menu: MenuController,public authService: AuthService, public router : Router, public toastController: ToastController) {
@@ -43,10 +41,38 @@ export class SignupPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    const check = JSON.parse(localStorage.getItem('vuenic-pwa'));
+    const check = JSON.parse(localStorage.getItem('vuenic-android'));
     if(check){
       this.router.navigate(["tabs/dashboard"])
     }
+  }
+
+  async signUpWithGoogle() {
+    let googleUser = await Plugins.GoogleAuth.signIn();
+    this.socialLogin.email = googleUser.email;
+    this.socialLogin.fullname = googleUser.name;
+    this.socialLogin.provider = "GOOGLE"
+    this.socialLogin.social_id = googleUser.id.toString();
+    this.socialLogin.token = googleUser.authentication.idToken;
+    //console.log(this.socialLogin)
+    this.postSocialAuth();
+   }
+
+  postSocialAuth(){
+    //console.log(this.socialLogin)
+    this.loading.present();
+    this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
+      //console.log(res)
+      if(res.access_token) {
+        localStorage.setItem('vuenic-android', JSON.stringify(res));
+        this.events.publish('email', res.email);
+        this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
+        this.loading.dismiss();
+      }else if(res.error){
+        this.presentToast('Invalid Token', 'bottom');
+        this.loading.dismiss();
+      }
+    });
   }
 
   onSubmit() {

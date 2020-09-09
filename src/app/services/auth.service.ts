@@ -31,28 +31,6 @@ export class AuthService {
     );
   }
 
-  GithubPost(data,type): Observable<any> {
-    return this.http.post<any>("https://cors-anywhere.herokuapp.com/https://github.com/"+type, data)
-    .pipe(
-      tap(_ => this.log('github-post')),
-      catchError(this.handleError('github-post', []))
-    );
-  }
-
-  GithubGet(type): Observable<any> {
-    const githubToken = JSON.parse(localStorage.getItem('vuenic-github'));
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization' : 'token '+ githubToken['access_token']
-      })
-    };
-    return this.http.get<any>("https://api.github.com/"+type, httpOptions)
-    .pipe(
-      tap(_ => this.log('get-github-req')),
-      catchError(this.handleError('get-github-req', []))
-    );
-  }
-
   GetRequest(type): Observable<any> {
     return this.http.get<any>(apiUrl+type)
     .pipe(
@@ -121,6 +99,6 @@ export class AuthService {
   }
 
   isAuthenticated(){
-    return localStorage.getItem('vuenic-pwa');
+    return localStorage.getItem('vuenic-android');
   }
 }

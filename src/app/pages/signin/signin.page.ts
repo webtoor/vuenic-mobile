@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { EventsService } from '../../services/events.service';
 import { Plugins } from '@capacitor/core';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
@@ -22,8 +23,6 @@ export class SigninPage implements OnInit {
     social_id: '',
     token: ''
   }
-  socialToken;
-  socialProvider;
   showPassword = false;
   passwordToggleIcon = "eye";
   constructor(public route : ActivatedRoute, public events: EventsService, public loading: LoaderService, public toastController: ToastController, public menu: MenuController, private formBuilder: FormBuilder, public authService: AuthService, public router : Router) { 
@@ -38,7 +37,7 @@ export class SigninPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    const check = JSON.parse(localStorage.getItem('vuenic-pwa'));
+    const check = JSON.parse(localStorage.getItem('vuenic-android'));
     if(check){
       this.router.navigate(["tabs/dashboard"])
     }
@@ -52,6 +51,7 @@ export class SigninPage implements OnInit {
     this.socialLogin.social_id = googleUser.id.toString();
     this.socialLogin.token = googleUser.authentication.idToken;
     //console.log(this.socialLogin)
+    this.postSocialAuth();
    }
 
   postSocialAuth(){
@@ -60,7 +60,7 @@ export class SigninPage implements OnInit {
     this.authService.Postlogin(this.socialLogin, 'social-login').subscribe(res => {
       //console.log(res)
       if(res.access_token) {
-        localStorage.setItem('vuenic-pwa', JSON.stringify(res));
+        localStorage.setItem('vuenic-android', JSON.stringify(res));
         this.events.publish('email', res.email);
         this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
         this.loading.dismiss();
@@ -81,7 +81,7 @@ export class SigninPage implements OnInit {
     this.authService.Postlogin(this.loginForm.value, 'signin').subscribe(res => {
       //console.log(res)
       if(res.access_token) {
-        localStorage.setItem('vuenic-pwa', JSON.stringify(res));
+        localStorage.setItem('vuenic-android', JSON.stringify(res));
         this.events.publish('email', res.email);
         this.router.navigate(['/tabs/dashboard'], {replaceUrl: true});
         this.loading.dismiss();
