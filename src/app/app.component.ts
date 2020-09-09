@@ -47,7 +47,7 @@ export class AppComponent {
       this.emailShow = email;
       console.log(this.emailShow);
     });
-    
+
     this.initializeApp();
 
     this.platform.backButton.subscribe(() => {
@@ -69,7 +69,7 @@ export class AppComponent {
         StatusBar.setBackgroundColor({
           color:'#17a9d0'
         });
-      }, 100);
+      }, 300);
     });
   }
 
