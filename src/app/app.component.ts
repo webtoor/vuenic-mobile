@@ -26,11 +26,11 @@ export class AppComponent {
       url: '/tabs/account',
       icon: 'person-circle'
     },
-    {
+    /* {
       title: 'About',
       url: '/tabs/about',
       icon: 'information-circle'
-    },
+    }, */
   ];
 
   constructor(

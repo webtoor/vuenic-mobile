@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: ConfDeviceSensorPage
-  },
-  {
-    path: 'edit-device-sensor/:project_device_id',
-    loadChildren: () => import('./edit-device-sensor/edit-device-sensor.module').then( m => m.EditDeviceSensorPageModule)
   }
 ];
 

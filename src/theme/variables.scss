@@ -5,7 +5,7 @@
 :root {
 
   --ion-background-color:#FFFFFF;
-  --ion-font-family: 'OpenSans-Regular';
+  --ion-font-family: 'Raleway-Medium';
 
   /** primary **/
   //--ion-color-primary: #3880ff;
@@ -308,11 +308,17 @@
   --ion-color-tint: var(--ion-color-grey-light-tint);
 }
 
-@font-face {
+/* @font-face {
   font-family: 'OpenSans-Regular';
   font-style: normal;
   font-weight: normal;
   src: url('../assets/fonts/OpenSans-Regular.ttf');
+} */
+
+@font-face {
+  font-family: 'Raleway-Medium';
+  src: url('../assets/fonts/Raleway-Medium.ttf');
+
 }
 
 ion-alert.select-alert {
