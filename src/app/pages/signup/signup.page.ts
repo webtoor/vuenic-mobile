@@ -50,7 +50,7 @@ export class SignupPage implements OnInit {
   async signUpWithGoogle() {
     let googleUser = await Plugins.GoogleAuth.signIn();
     this.socialLogin.email = googleUser.email;
-    this.socialLogin.fullname = googleUser.name;
+    this.socialLogin.fullname = googleUser.displayName;
     this.socialLogin.provider = "GOOGLE"
     this.socialLogin.social_id = googleUser.id.toString();
     this.socialLogin.token = googleUser.authentication.idToken;
