@@ -11,6 +11,7 @@ export class AccountPage implements OnInit {
   fullName : String
   info
   deviceInfo
+  deviceTotal  = 0;
   constructor(public router : Router, public httpService: AuthService) { }
 
   ngOnInit() {
@@ -21,11 +22,17 @@ export class AccountPage implements OnInit {
 
   getProjectDeviceInfo(){
     this.httpService.GetRequest('account-project-device').subscribe(res => {
-      //console.log(res);
+      console.log(res);
       if(res.status == 200){
         this.info = res.data
         this.deviceInfo = res.data[0].project_device
-        console.log(this.deviceInfo)
+        if(this.info.length > 0){
+          for(let i=0; i<this.info.length; i++){
+            if(this.info[i].project_device){
+              this.deviceTotal = this.deviceTotal +  parseInt(this.info[i].project_device.length);
+            }
+          }
+        }
       }
     });
   }
