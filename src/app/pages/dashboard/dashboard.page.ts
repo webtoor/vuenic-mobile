@@ -127,6 +127,7 @@ export class DashboardPage implements OnInit {
   segmentChanged(value){
     //console.log('segmentChanged')
    //console.log(value)
+    this.alive = false;
     this.segmentDefault = value
     this.getSensorData(this.segmentDefault);
     this.setInterval();
@@ -134,7 +135,7 @@ export class DashboardPage implements OnInit {
 
   setInterval(){
     //console.log("Activate Interval")
-    const intervallTimer = interval(10000);
+    const intervallTimer = interval(1000 * 15);
     this.subscription = intervallTimer.pipe(takeWhile(() => this.alive)).subscribe(val => this.getSensorData(this.segmentDefault));
   }
 
