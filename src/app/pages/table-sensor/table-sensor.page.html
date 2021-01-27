@@ -28,15 +28,17 @@
             <b *ngIf="sensorID == 2">Kelembaban Tanah</b>
             <b *ngIf="sensorID == 3">Suhu</b>
             <b *ngIf="sensorID == 4">Suhu Air</b>
-            <b *ngIf="sensorID == 5">pH</b>
-            <b *ngIf="sensorID == 6">TDS</b>
-            <b *ngIf="sensorID == 7">Warna (RGB)</b>
-            <b *ngIf="sensorID == 8">Jarak</b>
-            <b *ngIf="sensorID == 9">Ultraviolet</b>
-            <b *ngIf="sensorID == 10">Intensitas Cahaya</b>
-            <b *ngIf="sensorID == 11">Debu/Asap</b>
-            <b *ngIf="sensorID == 12">O<sub>2</sub></b>
-            <b *ngIf="sensorID == 13">CO<sub>2</sub></b>       
+            <b *ngIf="sensorID == 5">pH Air</b>
+            <b *ngIf="sensorID == 6">pH Tanah</b>
+            <b *ngIf="sensorID == 7">TDS</b>
+            <b *ngIf="sensorID == 8">Warna (RGB)</b>
+            <b *ngIf="sensorID == 9">Curah Hujan</b>
+            <b *ngIf="sensorID == 10">Jarak</b>
+            <b *ngIf="sensorID == 11">Ultraviolet</b>
+            <b *ngIf="sensorID == 12">Intensitas Cahaya</b>
+            <b *ngIf="sensorID == 13">Debu/Asap</b>
+            <b *ngIf="sensorID == 14">O<sub>2</sub></b>
+            <b *ngIf="sensorID == 15">CO<sub>2</sub></b>       
           </ion-col>
         </ion-row>
         <ion-row *ngFor="let data of arraySensor" class="data-row">
@@ -50,14 +52,16 @@
             <b *ngIf="(sensorID == 3) && (sensorID != null)"><sup> °C</sup></b>
             <b *ngIf="(sensorID == 4) && (sensorID != null)"><sup> °C</sup></b>
             <b *ngIf="(sensorID == 5) && (sensorID != null)"><sup> pH</sup></b>
-            <b *ngIf="(sensorID == 6) && (sensorID != null)"><sup> ppm</sup></b>
-            <b *ngIf="(sensorID == 7) && (sensorID != null)"><sup> color</sup></b>
-            <b *ngIf="(sensorID == 8) && (sensorID != null)"><sup> meter</sup></b>
-            <b *ngIf="(sensorID == 9) && (sensorID != null)"><sup> -</sup></b>
-            <b *ngIf="(sensorID == 10) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 6) && (sensorID != null)"><sup> pH</sup></b>
+            <b *ngIf="(sensorID == 7) && (sensorID != null)"><sup> ppm</sup></b>
+            <b *ngIf="(sensorID == 8) && (sensorID != null)"><sup> color</sup></b>
+            <b *ngIf="(sensorID == 9) && (sensorID != null)"><sup> mm</sup></b>
+            <b *ngIf="(sensorID == 10) && (sensorID != null)"><sup> meter</sup></b>
             <b *ngIf="(sensorID == 11) && (sensorID != null)"><sup> -</sup></b>
             <b *ngIf="(sensorID == 12) && (sensorID != null)"><sup> -</sup></b>
             <b *ngIf="(sensorID == 13) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 14) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 15) && (sensorID != null)"><sup> -</sup></b>
           </ion-col>
         </ion-row>
       </ion-grid>
