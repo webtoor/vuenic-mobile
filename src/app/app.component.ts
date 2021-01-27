@@ -14,7 +14,7 @@ const { SplashScreen, StatusBar } = Plugins;
 export class AppComponent {
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   public selectedIndex = 0;
-  emailShow :string;
+  emailShow: string;
   public appPages = [
     {
       title: 'Dashboard',
@@ -35,12 +35,12 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
-    private events:EventsService,
+    private events: EventsService,
     private alertCtrl: AlertController,
     private router: Router,
   ) {
-    const token = JSON.parse(localStorage.getItem('vuenic-pwa'));
-    if(token){
+    const token = JSON.parse(localStorage.getItem('vuenic-android'));
+    if (token) {
       this.emailShow = token.email;
     }
     this.events.subscribe('email', (email) => {
@@ -59,7 +59,7 @@ export class AppComponent {
         this.router.navigate(["/tabs/dashboard"])
       }
     });
-    
+
   }
 
   initializeApp() {
@@ -67,7 +67,7 @@ export class AppComponent {
       setTimeout(() => {
         SplashScreen.hide();
         StatusBar.setBackgroundColor({
-          color:'#17a9d0'
+          color: '#17a9d0'
         });
       }, 300);
     });
