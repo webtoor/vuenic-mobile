@@ -100,15 +100,16 @@
               <ion-card-subtitle *ngIf="sensor.sensor_id == 3">Suhu</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 4">Suhu Air</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 5">pH</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 6">TDS</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 7">Warna (RGB)</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 8">Jarak</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 9">Ultraviolet</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 10">Intensitas Cahaya</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 11">Debu/Asap</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 12">O<sub>2</sub></ion-card-subtitle>
-              <ion-card-subtitle *ngIf="sensor.sensor_id == 13">CO<sub>2</sub></ion-card-subtitle>
-
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 6">pH Tanah</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 7">TDS</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 8">Warna (RGB)</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 9">Curah Hujan</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 10">Jarak</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 11">Ultraviolet</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 12">Intensitas Cahaya</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 13">Debu/Asap</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 14">O<sub>2</sub></ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 15">CO<sub>2</sub></ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content style="padding:0">
@@ -120,14 +121,16 @@
                     <ion-img *ngIf="sensor.sensor_id == 3" src="/assets/images/sensor/temperature.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 4" src="/assets/images/sensor/water-temperature.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 5" src="/assets/images/sensor/ph.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 6" src="/assets/images/sensor/tds.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 7" src="/assets/images/sensor/rgb.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 8" src="/assets/images/sensor/distance.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 9" src="/assets/images/sensor/uv.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 10" src="/assets/images/sensor/light.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 11" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
-                    <ion-img *ngIf="sensor.sensor_id == 12" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 6" src="/assets/images/sensor/ph.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 7" src="/assets/images/sensor/tds.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 8" src="/assets/images/sensor/rgb.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 9" src="/assets/images/sensor/rain.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 10" src="/assets/images/sensor/distance.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 11" src="/assets/images/sensor/uv.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 12" src="/assets/images/sensor/light.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 13" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 14" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
+                    <ion-img *ngIf="sensor.sensor_id == 15" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
 
                   </ion-col>
                   <ion-col>
@@ -138,14 +141,16 @@
                       <b *ngIf="(sensor.sensor_id == 3) && (sensor.data_sensor != null)"><sup>°C</sup></b>
                       <b *ngIf="(sensor.sensor_id == 4) && (sensor.data_sensor != null)"><sup>°C</sup></b>
                       <b *ngIf="(sensor.sensor_id == 5) && (sensor.data_sensor != null)"><sup>pH</sup></b>
-                      <b *ngIf="(sensor.sensor_id == 6) && (sensor.data_sensor != null)"><sup>ppm</sup></b>
-                      <b *ngIf="(sensor.sensor_id == 7) && (sensor.data_sensor != null)"><sup>color</sup></b>
-                      <b *ngIf="(sensor.sensor_id == 8) && (sensor.data_sensor != null)"><sup>meter</sup></b>
-                      <b *ngIf="(sensor.sensor_id == 9) && (sensor.data_sensor != null)"><sup>-</sup></b>
-                      <b *ngIf="(sensor.sensor_id == 10) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 6) && (sensor.data_sensor != null)"><sup>pH</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 7) && (sensor.data_sensor != null)"><sup>ppm</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 8) && (sensor.data_sensor != null)"><sup>color</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 9) && (sensor.data_sensor != null)"><sup>mm</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 10) && (sensor.data_sensor != null)"><sup>meter</sup></b>
                       <b *ngIf="(sensor.sensor_id == 11) && (sensor.data_sensor != null)"><sup>-</sup></b>
                       <b *ngIf="(sensor.sensor_id == 12) && (sensor.data_sensor != null)"><sup>-</sup></b>
                       <b *ngIf="(sensor.sensor_id == 13) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 14) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 15) && (sensor.data_sensor != null)"><sup>-</sup></b>
                     </div>
                   </ion-col>
                 </ion-row>
