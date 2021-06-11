@@ -11,15 +11,15 @@ export class ConfDeviceSensorPage implements OnInit {
   project_device_id
   apiDevKey;
   userProjectID;
-  constructor(public router: Router,public httpService: AuthService, public route : ActivatedRoute,) { 
+  constructor(public router: Router, public httpService: AuthService, public route: ActivatedRoute,) {
     this.project_device_id = this.route.snapshot.paramMap.get('project_device_id');
   }
 
   ngOnInit() {
     const params = JSON.parse(localStorage.getItem('vuenic-dev-key-android'));
     //console.log(params)
-    for(var j=0; j < params.length; j++){
-      if(params[j]["id"] == this.project_device_id){
+    for (var j = 0; j < params.length; j++) {
+      if (params[j]["id"] == this.project_device_id) {
         //console.log(params[j]["id"])
         this.userProjectID = params[j]["user_project_id"]
         this.apiDevKey = params[j]["key"]
@@ -28,15 +28,15 @@ export class ConfDeviceSensorPage implements OnInit {
 
   }
 
-  editDeviceSensor(){
+  editDeviceSensor() {
     this.router.navigate(["tabs/dashboard/conf-device-sensor/" + this.project_device_id + "/edit-device-sensor/" + this.project_device_id])
   }
 
-  linkDocAPI(){
-    window.open("https://documenter.getpostman.com/view/2465660/T17AjAcd?version=latest");
+  linkDocAPI() {
+    window.open("https://github.com/vuenic/integration");
   }
 
-  copyTextButton(val: string){
+  copyTextButton(val: string) {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -50,12 +50,12 @@ export class ConfDeviceSensorPage implements OnInit {
     document.body.removeChild(selBox);
   }
 
-  deleteDevice(){
+  deleteDevice() {
     let navigationExtras: NavigationExtras = {
       state: {
-       funcStatus : "deleteDevice",
-       projectDeviceID : this.project_device_id,
-       userProjectID : this.userProjectID
+        funcStatus: "deleteDevice",
+        projectDeviceID: this.project_device_id,
+        userProjectID: this.userProjectID
       }
     };
     this.router.navigate(['/delete-confirm'], navigationExtras)
