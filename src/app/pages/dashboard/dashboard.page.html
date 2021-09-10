@@ -110,6 +110,7 @@
               <ion-card-subtitle *ngIf="sensor.sensor_id == 13">Debu/Asap</ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 14">O<sub>2</sub></ion-card-subtitle>
               <ion-card-subtitle *ngIf="sensor.sensor_id == 15">CO<sub>2</sub></ion-card-subtitle>
+              <ion-card-subtitle *ngIf="sensor.sensor_id == 16">Ketinggian Air</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content style="padding:0">
@@ -131,7 +132,7 @@
                     <ion-img *ngIf="sensor.sensor_id == 13" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 14" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
                     <ion-img *ngIf="sensor.sensor_id == 15" src="/assets/images/sensor/air.png" style="height: 50px;"></ion-img>
-
+                    <ion-img *ngIf="sensor.sensor_id == 16" src="/assets/images/sensor/water-level.png" style="height: 50px;"></ion-img>
                   </ion-col>
                   <ion-col>
                     <div style="margin-top: 10px;">
@@ -151,6 +152,7 @@
                       <b *ngIf="(sensor.sensor_id == 13) && (sensor.data_sensor != null)"><sup>-</sup></b>
                       <b *ngIf="(sensor.sensor_id == 14) && (sensor.data_sensor != null)"><sup>-</sup></b>
                       <b *ngIf="(sensor.sensor_id == 15) && (sensor.data_sensor != null)"><sup>-</sup></b>
+                      <b *ngIf="(sensor.sensor_id == 16) && (sensor.data_sensor != null)"><sup>meter</sup></b>
                     </div>
                   </ion-col>
                 </ion-row>
