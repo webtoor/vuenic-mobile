@@ -4,6 +4,7 @@ import { IonRouterOutlet, Platform, AlertController } from '@ionic/angular';
 import { EventsService } from './services/events.service';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
+import { UpdateService } from './services/update.service';
 const { SplashScreen, StatusBar } = Plugins;
 
 @Component({
@@ -38,6 +39,7 @@ export class AppComponent {
     private events: EventsService,
     private alertCtrl: AlertController,
     private router: Router,
+    private updateService: UpdateService
   ) {
     const token = JSON.parse(localStorage.getItem('vuenic-android'));
     if (token) {
@@ -64,6 +66,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.updateService.checkForUpdate();
       setTimeout(() => {
         SplashScreen.hide();
         StatusBar.setBackgroundColor({
