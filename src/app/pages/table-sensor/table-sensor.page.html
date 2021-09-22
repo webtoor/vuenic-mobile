@@ -38,7 +38,8 @@
             <b *ngIf="sensorID == 12">Intensitas Cahaya</b>
             <b *ngIf="sensorID == 13">Debu/Asap</b>
             <b *ngIf="sensorID == 14">O<sub>2</sub></b>
-            <b *ngIf="sensorID == 15">CO<sub>2</sub></b>       
+            <b *ngIf="sensorID == 15">CO<sub>2</sub></b>    
+            <b *ngIf="sensorID == 16">Ketinggian Air</b>               
           </ion-col>
         </ion-row>
         <ion-row *ngFor="let data of arraySensor" class="data-row">
@@ -62,6 +63,7 @@
             <b *ngIf="(sensorID == 13) && (sensorID != null)"><sup> -</sup></b>
             <b *ngIf="(sensorID == 14) && (sensorID != null)"><sup> -</sup></b>
             <b *ngIf="(sensorID == 15) && (sensorID != null)"><sup> -</sup></b>
+            <b *ngIf="(sensorID == 16) && (sensorID != null)"><sup> meter</sup></b>
           </ion-col>
         </ion-row>
       </ion-grid>
