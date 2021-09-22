@@ -66,6 +66,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.updateService.checkForMaintenance();
       this.updateService.checkForUpdate();
       setTimeout(() => {
         SplashScreen.hide();

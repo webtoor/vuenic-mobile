@@ -8,24 +8,28 @@ import { AlertController, Platform } from '@ionic/angular';
 const { NativeMarket } = Plugins;
 
 interface AppUpdate {
-  current: string;
-  enabled: boolean;
-  msg?: {
-    title: string;
-    msg: string;
-    btn: string;
-  };
-  majorMsg?: {
-    title: string;
-    msg: string;
-    btn: string
-  };
-  minorMsg?: {
-    title: string;
-    msg: string;
-    btn: string
+  data: {
+    name: any;
+    configs: {
+      current: string;
+      enabled: boolean;
+      msg?: {
+        title: string;
+        msg: string;
+        btn: string;
+      };
+      majorMsg?: {
+        title: string;
+        msg: string;
+        btn: string
+      };
+      minorMsg?: {
+        title: string;
+        msg: string;
+        btn: string
+      }
+    }
   }
-
 }
 
 @Injectable({
@@ -33,8 +37,8 @@ interface AppUpdate {
 })
 
 export class UpdateService {
-  updateExample = 'https://cors-anywhere.herokuapp.com/https://devdactic.fra1.digitaloceanspaces.com/tutorial/version.json';
-  maintenanceExample = 'https://cors-anywhere.herokuapp.com/https://devdactic.fra1.digitaloceanspaces.com/tutorial/maintenance.json'
+  versionInfo = 'http://192.168.1.7:8080/v1/version-info';
+  maintenanceInfo = 'http://192.168.1.7:8080/v1/maintenance-info'
 
   constructor(private http: HttpClient,
     private alertCtrl: AlertController,
@@ -42,24 +46,29 @@ export class UpdateService {
     private iab: InAppBrowser,
     private plt: Platform) { }
 
-  async checkForUpdate() {
-    this.http.get(this.updateExample).subscribe(async (info: AppUpdate) => {
-      console.log("result: ", info)
-      if (!info.enabled) {
-        this.presentAlert(info.msg.title, info.msg.msg)
-      } else {
-        const versionNumber = await this.appVersion.getVersionNumber()
-        // 1.0.3
-        const splittedVersion = versionNumber.split('.')
-        const serverVersion = info.current.split('.');
+  async checkForMaintenance() {
+    this.http.get(this.maintenanceInfo).subscribe(async (info: AppUpdate) => {
+      const data = JSON.parse(`${info.data.configs}`)
+      if (data.enabled) {
+        this.presentAlert(data.msg.title, data.msg.msg)
+      }
+    });
+  }
 
-        if (serverVersion[0] > splittedVersion[0]) {
-          this.presentAlert(info.majorMsg.title, info.majorMsg.msg, info.majorMsg.btn)
-        } else if (serverVersion[1] > splittedVersion[1]) {
-          this.presentAlert(info.minorMsg.title, info.minorMsg.msg, info.minorMsg.btn)
-        } else if (serverVersion[2] > splittedVersion[2]) {
-          this.presentAlert(info.minorMsg.title, info.minorMsg.msg, info.minorMsg.btn)
-        }
+  async checkForUpdate() {
+    this.http.get(this.versionInfo).subscribe(async (info: AppUpdate) => {
+      //console.log(JSON.parse(`${info.data.configs}`))
+      const data = JSON.parse(`${info.data.configs}`)
+      //console.log(data.majorMsg.msg)
+      const versionNumber = await this.appVersion.getVersionNumber()
+      // 1.0.3
+      const splittedVersion = versionNumber.split('.')
+      const serverVersion = data.current.split('.');
+
+      if (serverVersion[0] > splittedVersion[0]) {
+        this.presentAlert(data.majorMsg.title, data.majorMsg.msg, data.majorMsg.btn)
+      } else if (serverVersion[1] > splittedVersion[1]) {
+        this.presentAlert(data.minorMsg.title, data.minorMsg.msg, data.minorMsg.btn)
       }
     });
   }
