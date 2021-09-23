@@ -37,8 +37,8 @@ interface AppUpdate {
 })
 
 export class UpdateService {
-  versionInfo = 'http://192.168.1.7:8080/v1/version-info';
-  maintenanceInfo = 'http://192.168.1.7:8080/v1/maintenance-info'
+  versionInfo = 'https://api.vuenic.com/v1/version-info';
+  maintenanceInfo = 'https://api.vuenic.com/v1/maintenance-info'
 
   constructor(private http: HttpClient,
     private alertCtrl: AlertController,
@@ -69,6 +69,8 @@ export class UpdateService {
         this.presentAlert(data.majorMsg.title, data.majorMsg.msg, data.majorMsg.btn)
       } else if (serverVersion[1] > splittedVersion[1]) {
         this.presentAlert(data.minorMsg.title, data.minorMsg.msg, data.minorMsg.btn)
+      } else if (serverVersion[2] > splittedVersion[2]) {
+        this.presentAlert(data.minorMsg2.title, data.minorMsg2.msg, data.minorMsg2.btn)
       }
     });
   }
