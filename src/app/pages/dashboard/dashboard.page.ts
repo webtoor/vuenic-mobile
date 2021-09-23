@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { UserProjectService } from '../../services/user-project.service';
 import { MenuController } from '@ionic/angular';
 import { DeviceSensorService } from '../../services/device-sensor.service';
+import { LoaderService } from '../../services/loader.service';
 import { interval, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
@@ -30,7 +31,7 @@ export class DashboardPage implements OnInit {
   alive = true;
   backButton = 0;
   devicePosition = 0
-  constructor(public route: ActivatedRoute, public router: Router, public menu: MenuController, public httpService: UserProjectService, public httpDeviceSensor: DeviceSensorService, private _ngZone: NgZone) {
+  constructor(public loading: LoaderService, public route: ActivatedRoute, public router: Router, public menu: MenuController, public httpService: UserProjectService, public httpDeviceSensor: DeviceSensorService, private _ngZone: NgZone) {
     this.menu.enable(true);
   }
 
@@ -87,6 +88,7 @@ export class DashboardPage implements OnInit {
   getUserProject() {
     this.commodityName = null;
     this.commodityTypeName = null;
+    this.loading.present();
     this.httpService.getUserProject('user-project-loc/' + this.user_project_id).subscribe(res => {
       //console.log(res);
       if ((res.status == 200) && (Object.keys(res.data).length > 0)) {
@@ -124,6 +126,7 @@ export class DashboardPage implements OnInit {
         }
       }
     });
+    this.loading.dismiss();
   }
 
   segmentChanged(value) {
