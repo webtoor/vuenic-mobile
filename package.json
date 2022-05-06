@@ -1,6 +1,6 @@
 {
   "name": "vuenic-apps",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
-    "@angular/cli": "~9.1.12",
+    "@angular/cli": "9.1.13",
     "@angular/compiler": "~9.1.12",
     "@angular/compiler-cli": "~9.1.12",
     "@angular/language-service": "~9.1.12",
